@@ -1,0 +1,31 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // Implement your solution here
+        if(null == A || A.length==0){
+            return 0;
+        }
+        int N= A.length;
+
+        int maxProfit=0;
+
+        int min = A[0];
+        for (int i=1;i<N;i++){
+            if(min>A[i]){
+                min=A[i];
+            }
+            int profit=A[i]-min;
+            if (profit>maxProfit){
+                maxProfit=profit;
+            }
+            
+            
+        }
+        return maxProfit;
+    }
+}

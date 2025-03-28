@@ -1,0 +1,51 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] A) {
+        int N = A.length;
+        
+        // Step 1: Find the candidate leader using Boyer-Moore Voting Algorithm
+        int candidate = -1;
+        int count = 0;
+        
+        for (int i = 0; i < N; i++) {
+            if (count == 0) {
+                candidate = A[i];
+            }
+            count += (A[i] == candidate) ? 1 : -1;
+        }
+
+        // Step 2: Verify if the candidate is actually the leader
+        int totalCount = 0;
+        for (int i = 0; i < N; i++) {
+            if (A[i] == candidate) {
+                totalCount++;
+            }
+        }
+
+        // If the candidate is not the leader, return 0 equi leaders
+        if (totalCount <= N / 2) {
+            return 0;
+        }
+
+        // Step 3: Calculate the equi leaders
+        int leftCount = 0; // Count of the leader in the left part of the array
+        int equiLeaders = 0;
+
+        // Iterate through the array and check for equi leaders
+        for (int i = 0; i < N - 1; i++) {
+            if (A[i] == candidate) {
+                leftCount++;
+            }
+            
+            int rightCount = totalCount - leftCount; // Right count is the total count minus the left count
+            
+            // Check if both left and right parts have a leader and if they both satisfy the majority condition
+            if (leftCount > (i + 1) / 2 && rightCount > (N - i - 1) / 2) {
+                equiLeaders++;
+            }
+        }
+
+        return equiLeaders;
+    }
+}

@@ -1,0 +1,15 @@
+class Solution {
+    public int solution(int[] A) {
+        // Initialize with the first element
+        int currentMax = A[0];
+        int overallMax = A[0];
+
+        // Iterate through the array starting from the second element
+        for (int i = 1; i < A.length; i++) {
+            currentMax = Math.max(A[i], currentMax + A[i]);
+            overallMax = Math.max(overallMax, currentMax);
+        }
+
+        return overallMax;
+    }
+}

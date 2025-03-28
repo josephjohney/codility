@@ -1,0 +1,37 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] A) {
+        int N = A.length;
+        
+        // Map to store the frequency of each element
+        Map<Integer, Integer> map = new HashMap<>();
+        int majorityCandidate = -1;
+        int maxCount = 0;
+
+        // Iterate over the array and count frequencies
+        for (int i = 0; i < N; i++) {
+            int count = map.getOrDefault(A[i], 0) + 1;
+            map.put(A[i], count);
+            
+            // Track the element with the highest count
+            if (count > maxCount) {
+                maxCount = count;
+                majorityCandidate = A[i];
+            }
+
+            // Early exit if the max count exceeds N/2
+            if (maxCount > N / 2) {
+                // Return the index of the first occurrence of the majority element
+                for (int j = 0; j < N; j++) {
+                    if (A[j] == majorityCandidate) {
+                        return j;
+                    }
+                }
+            }
+        }
+
+        // If no majority element exists, return -1
+        return -1;
+    }
+}

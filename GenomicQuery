@@ -1,0 +1,54 @@
+// you can also use imports, for example:
+import java.util.*;
+import java.util.stream.*;
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int[] solution(String S, int[] P, int[] Q) {
+        // Implement your solution here
+
+        int A=1;
+        int C=2;
+        int G=3;
+        int T=4;
+
+
+        int M=P.length;
+        int []R = new int [M];
+        System.out.println(S);
+        for(int i =0 ; i<M ;i++){
+            int first= P[i];
+            int last= Q[i];
+                    int min =4;
+            if (first >S.length() ||last>S.length()){
+                R[i]=-1;
+            }
+            else{
+            String sub=S.substring(first, last+1);
+            char[] chars=  sub.toCharArray();
+                System.out.println("chars"+ sub +"first"+first+
+                "last"+last);
+
+            // Map map = new HashMap<char
+            if(sub.contains("A")){
+                min =A;
+            }
+            else if (sub.contains("C")){
+                min=C;
+            }
+            else if (sub.contains("G")){
+                min=G;
+            }
+            else if(sub.contains("T")){
+                min= T;
+            }
+
+            
+            R[i]=min;
+            }
+
+        }
+        return R;
+    }
+}

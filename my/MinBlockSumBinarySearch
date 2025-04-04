@@ -1,0 +1,48 @@
+// you can also use imports, for example:
+import java.util.*;
+import java.util.stream.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int K, int M, int[] A) {
+        
+        // Binary search bounds
+        int low = IntStream.of(A).max().getAsInt();
+        int  high = IntStream.of(A).sum();
+        
+        
+
+        // Binary search for the minimum possible "large sum"
+        while (low < high) {
+            int mid = (low + high) / 2;
+
+            if (canDivide(A, K, mid)) {
+                high = mid; // Try a smaller max sum
+            } else {
+                low = mid + 1; // Increase the max sum allowed
+            }
+        }
+        
+        return low; // The minimal large sum
+    }
+
+    // Greedy function to check if we can split A into K blocks with max sum <= maxSum
+    private boolean canDivide(int[] A, int K, int maxSum) {
+        int blockCount = 1; // At least one block
+        int currentSum = 0;
+
+        for (int num : A) {
+            if (currentSum + num > maxSum) {
+                blockCount++; // Create new block
+                currentSum = num; // Start new block with current number
+                if (blockCount > K) return false; // Too many blocks needed
+            } else {
+                currentSum += num; // Continue adding to current block
+            }
+        }
+        
+        return true; // Successfully divided into <= K blocks
+    }
+}

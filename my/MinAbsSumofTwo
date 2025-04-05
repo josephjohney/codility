@@ -1,0 +1,36 @@
+// you can also use imports, for example:
+import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // Implement your solution here
+        int N = A.length;
+
+            // if (N<2) return 0;
+        int minSum=Integer.MAX_VALUE;
+        
+        int last =N-1;
+        Arrays.sort(A);
+        int first =0;
+        while(first<=last){
+            int sum = A[first]+A[last];
+            minSum=Math.min(Math.abs(sum),minSum);
+            if(sum<0){
+                first++;
+            }
+            else if (sum>0){
+                last--;
+            }
+            else{
+                return 0;
+            }
+        }
+        return minSum;
+   
+
+        
+    }
+}
